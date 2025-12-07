@@ -6,3 +6,4 @@ resources:
   - metallb-kustomization.yaml
   - metallb-config-kustomization.yaml
   - local-path-kustomization.yaml
+  - monitoring-kustomization.yaml
