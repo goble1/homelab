@@ -1,11 +1,11 @@
 apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
 metadata:
-  name: rancher-charts
+  name: containeroo
   namespace: flux-system
 spec:
   interval: 1h
-  url: https://charts.rancher.io
+  url: https://charts.containeroo.ch
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
@@ -20,10 +20,15 @@ spec:
       chart: local-path-provisioner
       sourceRef:
         kind: HelmRepository
-        name: rancher-charts
+        name: containeroo
         namespace: flux-system
   install:
     createNamespace: true
   upgrade:
     remediation:
       retries: 3
+  values:
+    storageClass:
+      create: true
+      name: local-path
+      defaultClass: true
