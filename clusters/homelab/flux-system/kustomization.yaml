@@ -7,3 +7,4 @@ resources:
   - metallb-config-kustomization.yaml
   - local-path-kustomization.yaml
   - monitoring-kustomization.yaml
+  - lcd-writer-kustomization.yaml
