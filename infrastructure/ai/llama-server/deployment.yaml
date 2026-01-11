@@ -21,7 +21,7 @@ spec:
           effect: "NoSchedule"
       containers:
         - name: llama-server
-          image: ghcr.io/ggerganov/llama.cpp:latest
+          image:  ghcr.io/ggml-org/llama.cpp:server-vulkan
           args:
             - "-m"
             - "/models/general-larger-model/qwen2.5-1.5b-instruct-q4_k_m.gguf"
