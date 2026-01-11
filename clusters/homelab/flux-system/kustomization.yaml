@@ -8,3 +8,4 @@ resources:
   - local-path-kustomization.yaml
   - monitoring-kustomization.yaml
   - lcd-writer-kustomization.yaml
+  - ai-kustomization.yaml
