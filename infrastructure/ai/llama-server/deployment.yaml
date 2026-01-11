@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: llama-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: llama-server
+  template:
+    metadata:
+      labels:
+        app: llama-server
+    spec:
+      nodeSelector:
+        workload: ai
+      tolerations:
+        - key: "workload"
+          operator: "Equal"
+          value: "ai"
+          effect: "NoSchedule"
+      containers:
+        - name: llama-server
+          image: ghcr.io/ggerganov/llama.cpp:latest
+          args:
+            - "-m"
+            - "/models/general-larger-model/qwen2.5-1.5b-instruct-q4_k_m.gguf"
+            - "--host"
+            - "0.0.0.0"
+            - "--port"
+            - "8000"
+            - "--n-gpu-layers"
+            - "99"
+          ports:
+            - name: http
+              containerPort: 8000
+          volumeMounts:
+            - name: models
+              mountPath: /models
+            - name: dri
+              mountPath: /dev/dri
+          securityContext:
+            privileged: true
+      volumes:
+        - name: models
+          persistentVolumeClaim:
+            claimName: models-pvc
+        - name: dri
+          hostPath:
+            path: /dev/dri
+            type: Directory
+
