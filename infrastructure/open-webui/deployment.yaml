@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: open-webui
+  namespace: ai-ui
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: open-webui
+  template:
+    metadata:
+      labels:
+        app: open-webui
+    spec:
+      # Do NOT schedule onto the AI node
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: workload
+                    operator: NotIn
+                    values: ["ai"]
+      containers:
+        - name: open-webui
+          image: ghcr.io/open-webui/open-webui:main
+          ports:
+            - containerPort: 8080
+              name: http
+          env:
+            # Point Open WebUI to your llama-server OpenAI-compatible endpoint
+            - name: OPENAI_API_BASE_URL
+              value: "http://llama-server.ai.svc.cluster.local:8000/v1"
+            # Most OpenAI-compatible servers ignore the key, but Open WebUI wants one set
+            - name: OPENAI_API_KEY
+              value: "local"
+          volumeMounts:
+            - name: data
+              mountPath: /app/backend/data
+      volumes:
+        - name: data
+          emptyDir: {}
+

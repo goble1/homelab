@@ -9,3 +9,4 @@ resources:
   - monitoring-kustomization.yaml
   - lcd-writer-kustomization.yaml
   - ai-kustomization.yaml
+  - openwebui-kustomization.yaml
