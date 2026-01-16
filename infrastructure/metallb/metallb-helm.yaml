@@ -27,3 +27,8 @@ spec:
   upgrade:
     remediation:
       retries: 3
+  values:
+    controller:
+      enabled: true
+    speaker:
+      enabled: true
