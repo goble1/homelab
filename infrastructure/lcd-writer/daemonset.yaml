@@ -35,7 +35,7 @@ spec:
                 fieldRef:
                   fieldPath: spec.nodeName
             - name: SERIAL_DEV
-              value: /dev/ttyUSB0
+              value: /dev/lcd 
             - name: HOST_PROC
               value: /host/proc
 
@@ -43,16 +43,16 @@ spec:
             privileged: true
 
           volumeMounts:
-            - name: dev-ttyusb0
-              mountPath: /dev/ttyUSB0
+            - name: dev-lcd 
+              mountPath: /dev/lcd 
             - name: host-proc
               mountPath: /host/proc
               readOnly: true
 
       volumes:
-        - name: dev-ttyusb0
+        - name: dev-lcd 
           hostPath:
-            path: /dev/ttyUSB0
+            path: /dev/lcd
             type: CharDevice
         - name: host-proc
           hostPath:
