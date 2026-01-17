@@ -27,7 +27,7 @@ spec:
 
       containers:
         - name: lcd-writer
-          image: ghcr.io/goble1/send-node-info:0.1.0
+          image: ghcr.io/goble1/send-node-info:0.1.1
           imagePullPolicy: IfNotPresent
           env:
             - name: NODE_NAME
