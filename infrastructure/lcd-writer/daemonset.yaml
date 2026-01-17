@@ -39,15 +39,15 @@ spec:
             - name: HOST_PROC
               value: /host/proc
             - name: REFRESH_INTERVAL
-              value: 30s          # or 5m
+              value: 5m 
             - name: BOOT_WAIT
               value: 3s           
             - name: WRITE_RETRIES
               value: "5"          
             - name: DEBUG
-              value: "true"      
+              value: "false"      
             - name: FORCE_TEST_MSG
-              value: "true"      
+              value: "false"      
 
           securityContext:
             privileged: true
