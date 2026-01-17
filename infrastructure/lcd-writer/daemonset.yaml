@@ -27,7 +27,7 @@ spec:
 
       containers:
         - name: lcd-writer
-          image: ghcr.io/goble1/send-node-info:0.1.1
+          image: ghcr.io/goble1/send-node-info:0.1.2
           imagePullPolicy: IfNotPresent
           env:
             - name: NODE_NAME
@@ -38,6 +38,16 @@ spec:
               value: /dev/lcd 
             - name: HOST_PROC
               value: /host/proc
+            - name: REFRESH_INTERVAL
+              value: 30s          # or 5m
+            - name: BOOT_WAIT
+              value: 3s           
+            - name: WRITE_RETRIES
+              value: "5"          
+            - name: DEBUG
+              value: "true"      
+            - name: FORCE_TEST_MSG
+              value: "true"      
 
           securityContext:
             privileged: true
